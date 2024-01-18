@@ -25,7 +25,11 @@ func (uc *Uscase) SyncDBToLocal() {
 				switch elem.Key {
 				case "_id":
 					id = elem.Value.(interface{})
-					results = append(results, primitive.D{{Key: "database_id", Value: id}})
+					results = append(results, primitive.D{
+						{Key: "database_id", Value: id},
+						{Key: "send_email", Value: nil},
+						{Key: "send_wa", Value: nil},
+					})
 				}
 
 			}
