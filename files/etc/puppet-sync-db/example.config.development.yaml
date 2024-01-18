@@ -1,0 +1,21 @@
+app:
+  env: local
+  address: 127.0.0.1
+  port: 8000
+  timezone: Asia/Jakarta
+
+mongo_db_remote:
+  driver: mongo
+  host: yourhost
+  username: ""
+  password: ""
+  port: 27017
+  database: dbname
+
+mongo_db_local:
+  driver: mongo
+  host: yourhost
+  username: ""
+  password: ""
+  port: 27017
+  database: dbname
