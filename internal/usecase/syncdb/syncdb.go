@@ -27,17 +27,24 @@ func (uc *Uscase) SyncDBToLocal() {
 
 	//prepare / parsing clean data
 	var results []interface{}
+	var filter []primitive.ObjectID
 	for _, v := range res {
 		if bsonMap, ok := v.(primitive.D); ok {
 			var id interface{}
 			var name string
 			var email string
 			var phone string
+			var filterid primitive.ObjectID
 
 			for _, elem := range bsonMap {
 				switch elem.Key {
 				case "_id":
 					id = elem.Value.(interface{})
+
+					if bsonMapid, okid := id.(primitive.ObjectID); okid {
+						filterid = bsonMapid
+					}
+
 				case "phone":
 					phone = strings.Replace(elem.Value.(string), " ", "", 1)
 				case "email":
@@ -49,6 +56,8 @@ func (uc *Uscase) SyncDBToLocal() {
 				}
 
 			}
+
+			filter = append(filter, filterid)
 
 			results = append(results, primitive.D{
 				{Key: "database_id", Value: id},
@@ -63,11 +72,18 @@ func (uc *Uscase) SyncDBToLocal() {
 	}
 
 	//store clean data to local server
-	tes, err := localPelamar.StoreMultipleActivitys(context.Background(), results)
+	resStoreAct, err := localPelamar.StoreMultipleActivitys(context.Background(), results)
 	if err != nil {
 		log.Fatalf("error StoreMultiplePelamar", err)
 	}
 
-	log.Println("tes", tes)
-	log.Println("tes", resStore)
+	//store clean data to local server
+	resFlag, err := jbPelamarRepo.SetFlag(context.Background(), filter)
+	if err != nil {
+		log.Fatalf("error StoreMultiplePelamar", err)
+	}
+
+	log.Println("resStore", resStore)
+	log.Println("resStoreAct", resStoreAct)
+	log.Println("resFlag", resFlag)
 }
