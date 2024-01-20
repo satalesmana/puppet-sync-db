@@ -47,9 +47,15 @@ func (uc *Uscase) SyncDBToLocal() {
 
 				case "phone":
 					phone = strings.Replace(elem.Value.(string), " ", "", 1)
+				case "telpon":
+					phone = elem.Value.(string)
 				case "email":
 					email = elem.Value.(string)
-				case "firstName":
+				case "nama": // when source is old pupeta version
+					name = elem.Value.(string)
+				case "realName": // when source is kupu
+					name = elem.Value.(string)
+				case "firstName": // when source is jobstreet
 					name = elem.Value.(string)
 				case "lastName":
 					name += " " + elem.Value.(string)
