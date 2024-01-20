@@ -2,17 +2,20 @@ package jobstereet_pelamar
 
 import (
 	"context"
+	config "puppet-sync-db/internal/model/config"
 
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Repo struct {
-	Db *mongo.Database
+	cfg *config.Config
+	Db  *mongo.Database
 }
 
-func NewRepoHandler(conDbRemote *mongo.Database) Handler {
+func NewRepoHandler(config *config.Config, conDbRemote *mongo.Database) Handler {
 	return &Repo{
-		Db: conDbRemote,
+		cfg: config,
+		Db:  conDbRemote,
 	}
 }
 

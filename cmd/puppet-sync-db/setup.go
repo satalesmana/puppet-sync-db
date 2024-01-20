@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
-	config "puppet-sync-db/internal/config"
+	model "puppet-sync-db/internal/model/config"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -16,7 +16,7 @@ func FailOnError(err error, msg string) {
 	}
 }
 
-func setupMongoDBConnection(config *config.Config, dbType string) (*mongo.Database, error) {
+func setupMongoDBConnection(config *model.Config, dbType string) (*mongo.Database, error) {
 
 	var (
 		mongodbURI  string

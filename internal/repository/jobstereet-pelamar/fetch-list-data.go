@@ -9,7 +9,7 @@ import (
 
 func (r *Repo) FetchListData(ctx context.Context, limit int64) ([]interface{}, error) {
 	filter := bson.D{{}}
-	mongoCollection := r.Db.Collection("scraping_jobstreet_pelamars")
+	mongoCollection := r.Db.Collection(r.cfg.Collection.Remote.PrimaryCollection)
 	findOptions := options.Find()
 	findOptions.SetLimit(limit)
 	cursor, err := mongoCollection.Find(ctx, filter, findOptions)

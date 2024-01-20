@@ -2,11 +2,11 @@ package main
 
 import (
 	"log"
-	config "puppet-sync-db/internal/config"
+	model "puppet-sync-db/internal/model/config"
 	"puppet-sync-db/internal/usecase/syncdb"
 )
 
-func startApp(config *config.Config) error {
+func startApp(config *model.Config) error {
 
 	mongoConnRemote, err := setupMongoDBConnection(config, "remote")
 	if err != nil {
@@ -20,7 +20,7 @@ func startApp(config *config.Config) error {
 		return err
 	}
 
-	syncDB := syncdb.NewSyncDBHandler(mongoConnRemote, mongoConnLocal)
+	syncDB := syncdb.NewSyncDBHandler(config, mongoConnRemote, mongoConnLocal)
 	syncDB.SyncDBToLocal()
 
 	return nil

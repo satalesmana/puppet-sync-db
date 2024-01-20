@@ -19,3 +19,11 @@ mongo_db_local:
   password: ""
   port: 27017
   database: dbname
+
+collection:
+  remote:
+    primary: primary_collection
+    secondary: secondary_collection
+  local:
+    activity: activity_collection
+    database: dabatase_collection
