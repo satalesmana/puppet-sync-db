@@ -6,6 +6,7 @@ type Config struct {
 	MongoDBLocal  MongoDB    `yaml:"mongo_db_local"`
 	Collection    Collection `yaml:"collection"`
 	Synclimit     int64      `yaml:"synclimit"`
+	Email         MailConfig `yaml:"mail_config"`
 }
 
 type App struct {
@@ -36,4 +37,14 @@ type RemoteCollection struct {
 type LocalCollection struct {
 	ActivityCollection string `yaml:"activity"`
 	DatabaseCollection string `yaml:"database"`
+}
+
+type MailConfig struct {
+	Host         string `yaml:"host"`
+	Port         int    `yaml:"port"`
+	SenderName   string `yaml:"sender_name"`
+	AuthEmail    string `yaml:"auth_email"`
+	AuthPassword string `yaml:"auth_password"`
+	Template     string `yaml:"template"`
+	Subject      string `yaml:"subject"`
 }
