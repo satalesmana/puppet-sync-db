@@ -5,6 +5,7 @@ type Config struct {
 	MongoDBRemote MongoDB    `yaml:"mongo_db_remote"`
 	MongoDBLocal  MongoDB    `yaml:"mongo_db_local"`
 	Collection    Collection `yaml:"collection"`
+	Synclimit     int64      `yaml:"synclimit"`
 }
 
 type App struct {

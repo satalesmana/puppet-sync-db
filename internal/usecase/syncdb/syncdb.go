@@ -13,7 +13,7 @@ import (
 func (uc *Uscase) SyncDBToLocal() {
 	//fetch data from remote server
 	jbPelamarRepo := repoJobstreet.NewRepoHandler(uc.config, uc.mongoConnRemote)
-	res, err := jbPelamarRepo.FetchListData(context.Background(), 5)
+	res, err := jbPelamarRepo.FetchListData(context.Background(), uc.config.Synclimit)
 	if err != nil {
 		log.Fatalf("error FetchListData", err)
 	}
