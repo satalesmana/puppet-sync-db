@@ -12,7 +12,7 @@ func (r *Repo) SetFlag(ctx context.Context, item []primitive.ObjectID) (int64, e
 
 	filter := bson.M{"_id": bson.M{"$in": item}}
 
-	mongoCollection := r.Db.Collection(r.cfg.Collection.Remote.PrimaryCollection)
+	mongoCollection := r.Db.Collection(r.cfg.Collection.Remote.Source)
 	update := bson.M{
 		"$set": bson.M{"sync_status": "1"},
 	}

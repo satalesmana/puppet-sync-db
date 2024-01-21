@@ -9,7 +9,7 @@ import (
 
 func (r *Repo) FetchListData(ctx context.Context, limit int64) ([]interface{}, error) {
 	filter := bson.D{{Key: "sync_status", Value: nil}}
-	mongoCollection := r.Db.Collection(r.cfg.Collection.Remote.PrimaryCollection)
+	mongoCollection := r.Db.Collection(r.cfg.Collection.Remote.Source)
 	findOptions := options.Find()
 	if limit > 0 {
 		findOptions.SetLimit(limit)

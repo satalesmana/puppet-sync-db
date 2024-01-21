@@ -30,8 +30,7 @@ type Collection struct {
 }
 
 type RemoteCollection struct {
-	PrimaryCollection   string `yaml:"primary"`
-	SecondaryCollection string `yaml:"secondary"`
+	Source string `yaml:"source"`
 }
 
 type LocalCollection struct {
