@@ -28,3 +28,12 @@ collection:
     database: dabatase_collection
 
 synclimit: 5
+
+mail_config:
+  host: hot
+  port: 465
+  sender_name: sender_name
+  auth_email: email
+  auth_password: password
+  template: "files/mail-template/example.template.html"
+  subject: "Example subject"
