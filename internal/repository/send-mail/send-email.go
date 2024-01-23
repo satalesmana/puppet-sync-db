@@ -13,7 +13,7 @@ func (r *Repo) SendEmail(to string) {
 	t, _ := template.ParseFiles(r.Cfg.Email.Template)
 
 	var body bytes.Buffer
-	mimeHeaders := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
+	mimeHeaders := "\n\n"
 	body.Write([]byte(fmt.Sprintf(" \n%s\n\n", mimeHeaders)))
 
 	t.Execute(&body, struct {
