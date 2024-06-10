@@ -22,4 +22,5 @@ func NewSyncDBHandler(config *model.Config, conDbRemote *mongo.Database, conDbLo
 
 type Handler interface {
 	SyncDBToLocal()
+	DeleteDBsync()
 }

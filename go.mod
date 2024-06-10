@@ -1,6 +1,6 @@
 module puppet-sync-db
 
-go 1.21
+go 1.20
 
 require (
 	go.mongodb.org/mongo-driver v1.13.1

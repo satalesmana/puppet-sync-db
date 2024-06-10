@@ -23,4 +23,5 @@ func NewRepoHandler(config *config.Config, conDbRemote *mongo.Database) Handler 
 type Handler interface {
 	FetchListData(ctx context.Context, limit int64) ([]interface{}, error)
 	SetFlag(ctx context.Context, item []primitive.ObjectID) (int64, error)
+	Delete(ctx context.Context, id interface{}) error
 }
