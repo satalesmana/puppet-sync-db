@@ -11,13 +11,13 @@ type Uscase struct {
 	connDb *mongo.Database
 }
 
-// func NewMailPromotionHandler(config *model.Config, coonDb *mongo.Database) Handler {
-// 	return &Uscase{
-// 		config: config,
-// 		connDb: coonDb,
-// 	}
-// }
+func NewMailPromotionHandler(config *model.Config, coonDb *mongo.Database) Handler {
+	return &Uscase{
+		config: config,
+		connDb: coonDb,
+	}
+}
 
-// type Handler interface {
-// 	SendMailPromotion()
-// }
+type Handler interface {
+	SendMailPromotion()
+}

@@ -9,7 +9,7 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${workspaceFolder}/cmd/puppet-sync-db",
+            "program": "${workspaceFolder}/cmd/puppet-promotion-service",
             "cwd": "${workspaceFolder}",
             "dlvFlags": ["--check-go-version=false"] 
         }
