@@ -2,10 +2,14 @@ package sendmail
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"log"
+	model "puppet-sync-db/internal/model/local-pelamars"
 	"text/template"
 
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 	"gopkg.in/gomail.v2"
 )
 
@@ -43,4 +47,24 @@ func (r *Repo) SendEmail(to string) {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+}
+
+func (r *Repo) FindEmail(ctx context.Context) (*model.Activity, error) {
+	mongoCollection := r.Db.Collection("activity")
+
+	filter := primitive.D{
+		{Key: "isMail", Value: r.Cfg.Email.IsMail},
+	}
+
+	var result model.Activity
+	err := mongoCollection.FindOne(context.TODO(), filter).Decode(&result)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, err
+		}
+		log.Fatal(err.Error())
+	}
+
+	return &result, nil
+
 }

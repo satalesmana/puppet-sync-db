@@ -47,4 +47,5 @@ type MailConfig struct {
 	AuthPassword string `yaml:"auth_password"`
 	Template     string `yaml:"template"`
 	Subject      string `yaml:"subject"`
+	IsMail       string `yaml:"isMail"`
 }

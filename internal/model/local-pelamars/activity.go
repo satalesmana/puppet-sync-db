@@ -2,9 +2,12 @@ package local_pelamar
 
 type (
 	Activity struct {
-		ID        string `json:"id"`
-		PelamarId string `json:"pelamarId"`
-		SendEmail int64  `json:"sendMail"`
-		SendWa    int64  `json:"sendWa"`
+		Id         string `json:"_id"`
+		DatabaseId string `json:"database_id"`
+		Name       string `json:"name"`
+		Email      string `json:"email"`
+		Phone      string `json:"phone"`
+		IsMail     string `gorm:"-" json:"isMail"`
+		IsPhone    string `gorm:"-" json:"isPhone"`
 	}
 )
