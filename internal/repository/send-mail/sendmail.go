@@ -22,5 +22,5 @@ func NewRepoHandler(cfg *config.Config, Db *mongo.Database) Handler {
 
 type Handler interface {
 	SendEmail(to string)
-	FindEmail(ctx context.Context) (*model.Activity, error)
+	FindEmail(ctx context.Context, limit int64) (*model.Activity, error)
 }
