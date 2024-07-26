@@ -48,4 +48,5 @@ type MailConfig struct {
 	Template     string `yaml:"template"`
 	Subject      string `yaml:"subject"`
 	IsMail       string `yaml:"isMail"`
+	SetFlag      string `yaml:"setFlag"`
 }

@@ -14,6 +14,12 @@ func (r *Uscase) SendMailPromotion() {
 		log.Fatal(err.Error())
 	}
 
-	log.Fatal("Send email to " + mailToSend.Email)
-	// sendMailRepo.SendEmail(mailToSend[0].Email)
+	log.Printf("Send email to " + mailToSend.Email)
+	sendMailRepo.SendEmail(mailToSend.Email)
+
+	_, errFlag := sendMailRepo.SetFlagMail(context.Background(), mailToSend.Email)
+	if errFlag != nil {
+		log.Fatal(err.Error())
+	}
+
 }
