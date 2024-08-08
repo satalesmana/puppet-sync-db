@@ -21,8 +21,8 @@ func startApp(config *model.Config) error {
 	}
 
 	syncDB := syncdb.NewSyncDBHandler(config, mongoConnRemote, mongoConnLocal)
-	// syncDB.SyncDBToLocal()
-	syncDB.DeleteDBsync()
+	syncDB.SyncDBToLocal()
+	// syncDB.DeleteDBsync()
 
 	return nil
 }
