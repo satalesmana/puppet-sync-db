@@ -23,7 +23,7 @@ func (r *Uscase) SendMailPromotion() {
 	}
 
 	sendMailRepo := repoSendMail.NewRepoHandler(r.config, r.connDb)
-	sendMailRepo.SendEmail("lesmanasata@gmail.com", dialer)
+	// sendMailRepo.SendEmail("lesmanasata@gmail.com", dialer)
 	mailToSend, err := sendMailRepo.FindEmail(context.Background(), limit)
 	if err != nil {
 		log.Fatal(err.Error())
