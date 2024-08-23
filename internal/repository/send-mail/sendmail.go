@@ -6,6 +6,7 @@ import (
 	model "puppet-sync-db/internal/model/local-pelamars"
 
 	"go.mongodb.org/mongo-driver/mongo"
+	"gopkg.in/gomail.v2"
 )
 
 type Repo struct {
@@ -21,7 +22,7 @@ func NewRepoHandler(cfg *config.Config, Db *mongo.Database) Handler {
 }
 
 type Handler interface {
-	SendEmail(to string)
+	SendEmail(to string, dialer *gomail.Dialer)
 	FindEmail(ctx context.Context, limit int64) ([]model.Activity, error)
 	SetFlagMail(ctx context.Context, email string) (int64, error)
 }

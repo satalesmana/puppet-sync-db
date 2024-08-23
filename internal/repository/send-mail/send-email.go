@@ -9,7 +9,7 @@ import (
 	"gopkg.in/gomail.v2"
 )
 
-func (r *Repo) SendEmail(to string) {
+func (r *Repo) SendEmail(to string, dialer *gomail.Dialer) {
 	t, _ := template.ParseFiles(r.Cfg.Email.Template)
 
 	var body bytes.Buffer
@@ -32,12 +32,12 @@ func (r *Repo) SendEmail(to string) {
 	mailer.SetHeader("Subject", r.Cfg.Email.Subject)
 	mailer.SetBody("text/html", result)
 
-	dialer := gomail.NewDialer(
-		r.Cfg.Email.Host,
-		r.Cfg.Email.Port,
-		r.Cfg.Email.AuthEmail,
-		r.Cfg.Email.AuthPassword,
-	)
+	// dialer := gomail.NewDialer(
+	// 	r.Cfg.Email.Host,
+	// 	r.Cfg.Email.Port,
+	// 	r.Cfg.Email.AuthEmail,
+	// 	r.Cfg.Email.AuthPassword,
+	// )
 
 	err := dialer.DialAndSend(mailer)
 	if err != nil {
