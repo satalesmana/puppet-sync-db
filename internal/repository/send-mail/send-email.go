@@ -4,13 +4,18 @@ import (
 	"bytes"
 	"fmt"
 	"log"
+	"strings"
 	"text/template"
+	"time"
 
 	"gopkg.in/gomail.v2"
 )
 
 func (r *Repo) SendEmail(to string, dialer *gomail.Dialer) {
 	t, _ := template.ParseFiles(r.Cfg.Email.Template)
+	getTime := time.Date(2021, 8, 15, 14, 30, 45, 100, time.Local)
+	time := getTime.Format("2006-01-02 15:4:5")
+	subject := strings.Replace(r.Cfg.Email.Subject, "__DATE_TIME__", time, -1)
 
 	var body bytes.Buffer
 	mimeHeaders := "\n\n"
@@ -29,15 +34,8 @@ func (r *Repo) SendEmail(to string, dialer *gomail.Dialer) {
 	mailer := gomail.NewMessage()
 	mailer.SetHeader("From", r.Cfg.Email.SenderName)
 	mailer.SetHeader("To", to)
-	mailer.SetHeader("Subject", r.Cfg.Email.Subject)
+	mailer.SetHeader("Subject", subject)
 	mailer.SetBody("text/html", result)
-
-	// dialer := gomail.NewDialer(
-	// 	r.Cfg.Email.Host,
-	// 	r.Cfg.Email.Port,
-	// 	r.Cfg.Email.AuthEmail,
-	// 	r.Cfg.Email.AuthPassword,
-	// )
 
 	err := dialer.DialAndSend(mailer)
 	if err != nil {

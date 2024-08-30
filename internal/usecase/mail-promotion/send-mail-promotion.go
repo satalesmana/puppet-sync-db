@@ -17,13 +17,14 @@ func (r *Uscase) SendMailPromotion() {
 		r.config.Email.AuthPassword,
 	)
 
+	sendMailRepo := repoSendMail.NewRepoHandler(r.config, r.connDb)
+	// sendMailRepo.SendEmail("lesmanasata@gmail.com", dialer)
+
 	limit, err := strconv.ParseInt(r.config.Email.Limit, 10, 64)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	sendMailRepo := repoSendMail.NewRepoHandler(r.config, r.connDb)
-	// sendMailRepo.SendEmail("lesmanasata@gmail.com", dialer)
 	mailToSend, err := sendMailRepo.FindEmail(context.Background(), limit)
 	if err != nil {
 		log.Fatal(err.Error())
