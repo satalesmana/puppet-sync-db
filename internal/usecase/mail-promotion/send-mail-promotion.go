@@ -18,7 +18,7 @@ func (r *Uscase) SendMailPromotion() {
 	)
 
 	sendMailRepo := repoSendMail.NewRepoHandler(r.config, r.connDb)
-	// sendMailRepo.SendEmail("lesmanasata@gmail.com", dialer)
+	// sendMailRepo.SendEmail(dialer, "lesmanasata@gmail.com", "tes")
 
 	limit, err := strconv.ParseInt(r.config.Email.Limit, 10, 64)
 	if err != nil {
@@ -32,7 +32,7 @@ func (r *Uscase) SendMailPromotion() {
 
 	for _, activity := range mailToSend {
 		log.Printf("Send email to " + activity.Email)
-		sendMailRepo.SendEmail(activity.Email, dialer)
+		sendMailRepo.SendEmail(dialer, activity.Email, activity.Name)
 
 		_, errFlag := sendMailRepo.SetFlagMail(context.Background(), activity.Email)
 		if errFlag != nil {
