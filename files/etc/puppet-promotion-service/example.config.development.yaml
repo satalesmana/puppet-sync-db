@@ -36,4 +36,4 @@ mail_config:
   auth_email: email
   auth_password: password
   template: "files/mail-template/example.template.html"
-  subject: "Tanya dosen official - Hii... __NAME__ this is daily news (__DATE_TIME__)"
+  subject: "Tanya dosen official - Hii... __NAME__ this is daily news on __DATE_TIME__"
