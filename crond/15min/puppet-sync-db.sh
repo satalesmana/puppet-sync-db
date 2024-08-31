@@ -1,5 +1,5 @@
 #!/bin/sh
 
-cd "/usr/src/app"
+cd "/home/puppetapp/puppet-sync-db"
 
 ./bin/puppet-sync-db
