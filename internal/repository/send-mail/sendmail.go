@@ -22,7 +22,7 @@ func NewRepoHandler(cfg *config.Config, Db *mongo.Database) Handler {
 }
 
 type Handler interface {
-	SendEmail(dialer *gomail.Dialer, to string, name string)
+	SendEmail(dialer *gomail.Dialer, to string, name string, sender string)
 	FindEmail(ctx context.Context, limit int64) ([]model.Activity, error)
 	SetFlagMail(ctx context.Context, email string) (int64, error)
 }

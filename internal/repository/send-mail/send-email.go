@@ -11,7 +11,7 @@ import (
 	"gopkg.in/gomail.v2"
 )
 
-func (r *Repo) SendEmail(dialer *gomail.Dialer, to string, name string) {
+func (r *Repo) SendEmail(dialer *gomail.Dialer, to string, name string, sender string) {
 	t, _ := template.ParseFiles(r.Cfg.Email.Template)
 	getTime := time.Date(2021, 8, 15, 14, 30, 45, 100, time.Local)
 	time := getTime.Format("Jan 2006")
@@ -33,7 +33,7 @@ func (r *Repo) SendEmail(dialer *gomail.Dialer, to string, name string) {
 	result := body.String()
 
 	mailer := gomail.NewMessage()
-	mailer.SetHeader("From", r.Cfg.Email.SenderName)
+	mailer.SetHeader("From", sender)
 	mailer.SetHeader("To", to)
 	mailer.SetHeader("Subject", subject)
 	mailer.SetBody("text/html", result)

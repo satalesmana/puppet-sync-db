@@ -24,8 +24,10 @@ func (r *Uscase) SendMailPromotion() {
 		smtpAccount.AuthPassword,
 	)
 
+	senderName := "Tanya Dosen Official <" + smtpAccount.AuthEmail + ">"
+
 	sendMailRepo := repoSendMail.NewRepoHandler(r.config, r.connDb)
-	// sendMailRepo.SendEmail(dialer, "lesmanasata@gmail.com", "tes")
+	// sendMailRepo.SendEmail(dialer, "lesmanasata@gmail.com", "tes", senderName)
 
 	limit, err := strconv.ParseInt(r.config.Email.Limit, 10, 64)
 	if err != nil {
@@ -39,7 +41,7 @@ func (r *Uscase) SendMailPromotion() {
 
 	for _, activity := range mailToSend {
 		log.Printf("Send email to " + activity.Email)
-		sendMailRepo.SendEmail(dialer, activity.Email, activity.Name)
+		sendMailRepo.SendEmail(dialer, activity.Email, activity.Name, senderName)
 
 		_, errFlag := sendMailRepo.SetFlagMail(context.Background(), activity.Email)
 		if errFlag != nil {
