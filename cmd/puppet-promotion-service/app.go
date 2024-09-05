@@ -14,7 +14,13 @@ func startApp(config *model.Config) error {
 		return err
 	}
 
-	sendMail := mailPromotion.NewMailPromotionHandler(config, connDb)
+	connDBRemote, err := setupMongoDBConnection(config, "remote")
+	if err != nil {
+		log.Fatalf("error startup service when connection setup to mongodb. err: %v", err)
+		return err
+	}
+
+	sendMail := mailPromotion.NewMailPromotionHandler(config, connDb, connDBRemote)
 	sendMail.SendMailPromotion()
 
 	log.Println("Successfully send")

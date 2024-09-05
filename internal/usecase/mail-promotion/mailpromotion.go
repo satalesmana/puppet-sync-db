@@ -7,14 +7,16 @@ import (
 )
 
 type Uscase struct {
-	config *model.Config
-	connDb *mongo.Database
+	config      *model.Config
+	connDb      *mongo.Database
+	conDBRemote *mongo.Database
 }
 
-func NewMailPromotionHandler(config *model.Config, coonDb *mongo.Database) Handler {
+func NewMailPromotionHandler(config *model.Config, coonDb *mongo.Database, conDBRemote *mongo.Database) Handler {
 	return &Uscase{
-		config: config,
-		connDb: coonDb,
+		config:      config,
+		connDb:      coonDb,
+		conDBRemote: conDBRemote,
 	}
 }
 

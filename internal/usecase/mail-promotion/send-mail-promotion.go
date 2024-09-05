@@ -3,6 +3,7 @@ package mailPromotion
 import (
 	"context"
 	"log"
+	repoSmtpAccount "puppet-sync-db/internal/repository/remote-smtpaccount"
 	repoSendMail "puppet-sync-db/internal/repository/send-mail"
 	"strconv"
 
@@ -10,11 +11,17 @@ import (
 )
 
 func (r *Uscase) SendMailPromotion() {
+	smtpAccountRepo := repoSmtpAccount.NewRepoHandler(r.conDBRemote)
+	smtpAccount, err := smtpAccountRepo.GetSmtpAccount(context.TODO())
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
 	dialer := gomail.NewDialer(
-		r.config.Email.Host,
-		r.config.Email.Port,
-		r.config.Email.AuthEmail,
-		r.config.Email.AuthPassword,
+		smtpAccount.HostName,
+		smtpAccount.Port,
+		smtpAccount.AuthEmail,
+		smtpAccount.AuthPassword,
 	)
 
 	sendMailRepo := repoSendMail.NewRepoHandler(r.config, r.connDb)

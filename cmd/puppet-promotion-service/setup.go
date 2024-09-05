@@ -20,8 +20,12 @@ func setupMongoDBConnection(config *model.Config, dbType string) (*mongo.Databas
 
 	var (
 		mongodbURI  string
-		mongoConfig = config.MongoDBLocal
+		mongoConfig = config.MongoDBRemote
 	)
+
+	if dbType == "local" {
+		mongoConfig = config.MongoDBLocal
+	}
 
 	if mongoConfig.Username == "" || mongoConfig.Password == "" {
 		mongodbURI = fmt.Sprintf("mongodb://%s:%s", mongoConfig.Host, mongoConfig.Port)
